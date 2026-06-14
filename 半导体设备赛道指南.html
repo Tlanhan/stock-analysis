@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半导体设备赛道指南 | 你赚了660元，但你真的懂吗？</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); }
+  .glass-dark { background: rgba(0,0,0,0.3); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+  .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #34d399 50%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .card-hover { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  .glow-blue { box-shadow: 0 0 30px rgba(96,165,250,0.15); }
+  .glow-green { box-shadow: 0 0 30px rgba(52,211,153,0.15); }
+  .glow-red { box-shadow: 0 0 30px rgba(239,68,68,0.15); }
+  .glow-yellow { box-shadow: 0 0 30px rgba(251,191,36,0.15); }
+  .glow-purple { box-shadow: 0 0 30px rgba(167,139,250,0.15); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0f0f0f; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+  @keyframes pulse-slow { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .stagger { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .heat-cell { transition: all 0.2s; }
+  .heat-cell:hover { transform: scale(1.08); z-index: 10; }
+
+  /* ========== 悬浮卡片系统 ========== */
+  .tip { position: relative; display: inline-flex; align-items: center; cursor: help; }
+  .tip-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; margin-left: 3px;
+    border-radius: 50%; font-size: 10px; font-weight: 700;
+    background: rgba(96,165,250,0.15); color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.3);
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .tip:hover .tip-icon { background: rgba(96,165,250,0.4); transform: scale(1.2); }
+  .tip-card {
+    position: absolute; bottom: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 340px; max-width: 90vw;
+    padding: 16px 18px;
+    background: rgba(15,15,18,0.98); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(96,165,250,0.1);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    z-index: 100;
+    font-size: 13px; line-height: 1.7; text-align: left;
+  }
+  .tip-card::after {
+    content: ''; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent; border-top-color: rgba(15,15,18,0.98);
+  }
+  .tip:hover .tip-card {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .tip-card-title {
+    font-weight: 700; font-size: 13px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tip-card-body { color: #9ca3af; font-size: 12.5px; line-height: 1.75; }
+  .tip-card-body strong { color: #e5e7eb; }
+  .tip-card-body code {
+    display: block; margin-top: 8px; padding: 8px 10px;
+    background: rgba(255,255,255,0.04); border-radius: 8px;
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11.5px;
+    color: #6ee7b7; border: 1px solid rgba(255,255,255,0.05);
+  }
+  .tip-card-body em { color: #fbbf24; font-style: normal; }
+
+  /* 防止右侧截断 */
+  .tip-right .tip-card { left: auto; right: 0; transform: translateY(8px); }
+  .tip-right .tip-card::after { left: auto; right: 30px; transform: none; }
+  .tip-right:hover .tip-card { transform: translateY(0); }
+</style>
+</head>
+<body class="bg-[#0a0a0b] text-gray-200 min-h-screen">
+
+<!-- ==================== HERO ==================== -->
+<section class="relative overflow-hidden border-b border-white/5">
+  <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/30 via-blue-950/20 to-amber-950/20"></div>
+  <div class="absolute inset-0" style="background-image: radial-gradient(circle at 20% 30%, rgba(52,211,153,0.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(96,165,250,0.08), transparent 40%);"></div>
+  <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div class="flex items-center gap-2 mb-6 stagger" style="animation-delay:0.1s">
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">159558 半导体设备ETF</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">赚了660元</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">深度研究</span>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-black tracking-tight stagger" style="animation-delay:0.2s">
+      <span class="gradient-text">半导体设备赛道</span><br>
+      <span class="text-white">完全指南</span>
+    </h1>
+    <p class="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl stagger" style="animation-delay:0.3s">
+      你靠159558赚了660元——但运气 ≠ 认知。这篇指南帮你从零搞懂：半导体设备是什么，你买的东西到底赚什么钱，以及下一步该怎么操作。
+    </p>
+    <div class="mt-4 text-sm text-gray-600 stagger" style="animation-delay:0.35s">
+      💡 提示：将鼠标悬停在
+      <span class="tip-icon" style="display:inline-flex;vertical-align:middle">i</span>
+      图标上，可以查看每个概念背后的<strong class="text-emerald-400/70">深层原理</strong>
+    </div>
+    <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl stagger" style="animation-delay:0.4s">
+      <div class="glass rounded-2xl p-4 text-center glow-green">
+        <div class="text-2xl font-bold text-emerald-400">660元</div>
+        <div class="text-xs text-gray-500 mt-1">你的已实现盈利</div>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center glow-blue">
+        <div class="text-2xl font-bold text-blue-400">$1,330亿</div>
+        <div class="text-xs text-gray-500 mt-1">2026全球设备市场</div>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center glow-yellow">
+        <div class="text-2xl font-bold text-amber-400">48-61%</div>
+        <div class="text-xs text-gray-500 mt-1">设备商毛利率区间</div>
+      </div>
+      <div class="glass rounded-2xl p-4 text-center glow-purple">
+        <div class="text-2xl font-bold text-purple-400">35%→50%</div>
+        <div class="text-xs text-gray-500 mt-1">国产替代率目标</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NAV ==================== -->
+<nav class="sticky top-0 z-50 glass-dark border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center gap-1 overflow-x-auto whitespace-nowrap text-sm">
+    <a href="#soul" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">① 灵魂拷问</a>
+    <a href="#chain" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">② 产业链</a>
+    <a href="#king" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">③ 为什么是王冠</a>
+    <a href="#etf" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">④ 你的ETF</a>
+    <a href="#companies" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">⑤ 五大龙头</a>
+    <a href="#cycle" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">⑥ 硅周期</a>
+    <a href="#risks" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">⑦ 风险地图</a>
+    <a href="#action" class="px-3 py-1.5 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">⑧ 操作方案</a>
+  </div>
+</nav>
+
+<!-- ==================== ① 灵魂拷问 ==================== -->
+<section id="soul" class="max-w-7xl mx-auto px-6 py-16">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">01</span>
+    <h2 class="text-2xl font-bold">灵魂拷问：你的660元是怎么赚的？</h2>
+  </div>
+
+  <div class="glass rounded-2xl p-6 md:p-8 mb-8 border border-amber-500/15">
+    <div class="flex items-start gap-3 mb-6">
+      <span class="text-3xl">🪞</span>
+      <div>
+        <h3 class="font-bold text-lg text-amber-400">先对镜自问三个问题</h3>
+        <p class="text-sm text-gray-500 mt-1">如果有一题答不上来——你的盈利大概率来自运气，不是认知。</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
+        <div class="text-sm font-bold text-amber-400 mb-2">Q1: 159558 买的是什么公司？</div>
+        <p class="text-xs text-gray-400">你能说出前三大持仓吗？知道它们各自做什么设备吗？</p>
+        <div class="mt-3 p-2 rounded-lg bg-amber-500/5 border border-amber-500/10">
+          <p class="text-xs text-amber-300/60">👉 如果说不出来，说明你在"盲买"</p>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
+        <div class="text-sm font-bold text-amber-400 mb-2">Q2: 半导体设备为什么能赚钱？</div>
+        <p class="text-xs text-gray-400">是国产替代？AI需求？还是周期复苏？核心驱动到底是哪个？</p>
+        <div class="mt-3 p-2 rounded-lg bg-amber-500/5 border border-amber-500/10">
+          <p class="text-xs text-amber-300/60">👉 如果只知道"涨了"，说明你没有逻辑锚</p>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50">
+        <div class="text-sm font-bold text-amber-400 mb-2">Q3: 什么时候该卖？</div>
+        <p class="text-xs text-gray-400">你知道半导体周期现在在什么位置吗？什么信号意味着该跑？</p>
+        <div class="mt-3 p-2 rounded-lg bg-amber-500/5 border border-amber-500/10">
+          <p class="text-xs text-amber-300/60">👉 如果不知道，说明你赚的是β不是α</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 运气 vs 认知 -->
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="glass rounded-2xl p-6">
+      <h3 class="font-bold mb-4 text-lg flex items-center gap-2">
+        <span class="text-2xl">🎲</span> 运气派（现在的你？）
+      </h3>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-start gap-2">
+          <span class="text-green-400 mt-0.5">●</span>
+          <span class="text-gray-400">看到"半导体"三个字就买了，因为"AI很火"</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-400 mt-0.5">●</span>
+          <span class="text-gray-400">不知道中微公司和北方华创有什么区别</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-400 mt-0.5">●</span>
+          <span class="text-gray-400">6/12高开后没设回落止盈，1500股利润从660元缩到25元
+            <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">⚠️ 这个教训值多少钱？</div><div class="tip-card-body">6/12那天你赚了660元，但剩余1500股从3.35滑到3.147，利润从+660缩到+25元。<br><br><strong>这就是"不懂"的代价：</strong><br>如果你知道半导体ETF日内波动5-6%是常态，你就会在高开后立刻设回落止盈。<br><br>你亏的不是钱，是<strong>"认知变现"的机会</strong>。<br><code>如果你设了回落3%止盈：<br>卖在3.25 → 多赚180元<br>660 + 180 = 840元<br>而不是 660 + 25 = 685元</code><br><br><em>知识 = 真金白银。</em></div></div></span>
+          </span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-green-400 mt-0.5">●</span>
+          <span class="text-gray-400">下次半导体暴跌时不知道该抄底还是割肉</span>
+        </div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-green-500/5 border border-green-500/15">
+        <p class="text-xs text-green-300/80">✅ 好消息：至少买对了赛道。半导体设备确实是当前最强主线之一。</p>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 border border-blue-500/20">
+      <h3 class="font-bold mb-4 text-lg flex items-center gap-2">
+        <span class="text-2xl">🧠</span> 认知派（读完这篇后的你）
+      </h3>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-start gap-2">
+          <span class="text-blue-400 mt-0.5">●</span>
+          <span class="text-gray-400">知道159558前三大持仓是中微公司（刻蚀）、北方华创（平台型）、拓荆科技（薄膜沉积）</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-blue-400 mt-0.5">●</span>
+          <span class="text-gray-400">能说清"国产替代+AI CapEx扩张"双轮驱动逻辑</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-blue-400 mt-0.5">●</span>
+          <span class="text-gray-400">知道当前处于AI超级周期中后段，会盯Book-to-Bill和SOX指数判断拐点
+            <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📊 什么是 Book-to-Bill？</div><div class="tip-card-body"><strong>订单出货比</strong>，半导体设备行业最重要的领先指标。<br><br>简单说：设备公司拿到的新订单 ÷ 当期确认的收入。<br><code>>1.0 = 订单增长 → 行业上行<br><1.0 = 订单萎缩 → 行业下行<br>通常领先行业拐点 2-3 个季度</code><br><br>2020-2021超级周期中，这个数字持续>1.2，随后半导体暴涨。2022下半年跌破1.0，行业就崩了。<br><br><em>盯住它，你就能提前2个季度知道拐点。</em></div></div></span>
+          </span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-blue-400 mt-0.5">●</span>
+          <span class="text-gray-400">能制定有纪律的止盈/止损计划，不再裸奔</span>
+        </div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-blue-500/5 border border-blue-500/15">
+        <p class="text-xs text-blue-300/80">🎯 目标：从"赚了运气钱"升级到"赚了认知钱"——这样下次还能赚。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ② 产业链全景 ==================== -->
+<section id="chain" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">02</span>
+    <h2 class="text-2xl font-bold">芯片是怎么造出来的？产业链全景</h2>
+  </div>
+  <p class="text-gray-400 mb-10 max-w-2xl">一颗芯片从无到有，经过5个环节。你的159558投在第②个环节——设备。</p>
+
+  <!-- 产业链链条 -->
+  <div class="glass rounded-2xl p-8 mb-8">
+    <h3 class="font-bold mb-6 text-lg">五步造芯片
+      <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🏭 为什么芯片要分这么多步？</div><div class="tip-card-body">因为<strong>每一步的技术壁垒都极高</strong>，没有任何一家公司能全部做好。<br><br>这就是半导体行业的本质：<br><code>NVIDIA设计芯片（不会造）<br>→ 台积电造芯片（不会设计）<br>→ ASML提供光刻机（不会造芯片）<br>→ 长电科技封装（不会设计）<br>→ 苹果用芯片（什么都不会）<br>───────────<br>每个环节都做到极致<br>→ 全球协作的结果</code><br><br>你的159558投在"ASML们"对应的环节——<strong>给台积电们卖机器的人</strong>。</div></div></span>
+    </h3>
+    <div class="flex flex-col md:flex-row items-stretch gap-3">
+      <div class="flex-1 rounded-xl bg-purple-500/5 border border-purple-500/20 p-4 text-center">
+        <div class="text-2xl mb-2">📐</div>
+        <div class="font-semibold text-purple-400">
+          设计 (EDA/IP)
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📐 EDA是什么？为什么这么重要？</div><div class="tip-card-body"><strong>EDA = 电子设计自动化软件</strong>，相当于芯片设计师的"Photoshop"。<br><br>一颗现代芯片有<strong>数百亿个晶体管</strong>，不可能手工画，必须用EDA软件自动布线。<br><br>全球EDA市场被三家美国公司垄断：<br><code>Synopsys ~31%<br>Cadence ~30%<br>Siemens EDA ~13%<br>───────────<br>美国垄断度 >74%</code><br><br>EDA是被"卡脖子"最严重的环节之一——如果美国禁用EDA，中国芯片设计公司直接停摆。</div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">Synopsys / Cadence / ARM</div>
+        <div class="text-xs text-purple-500 mt-2">市场规模 ~$190亿</div>
+      </div>
+      <div class="hidden md:flex items-center text-gray-600 text-xl">→</div>
+      <div class="flex-1 rounded-xl bg-blue-500/10 border-2 border-blue-500/40 p-4 text-center relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-blue-500 text-white text-xs font-bold">← 你在这里</div>
+        <div class="text-2xl mb-2">🔧</div>
+        <div class="font-semibold text-blue-400">
+          设备
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🔧 为什么设备是"卖铲人"？</div><div class="tip-card-body">淘金热时，最确定赚钱的不是淘金者，而是<strong>卖铲子的人</strong>。<br><br>同理：不管NVIDIA、AMD、还是Intel在AI芯片大战中谁赢，<strong>它们都需要买设备</strong>。<br><br>设备公司不赌谁赢，只赌一件事：<br><code>全球芯片需求在增长吗？<br>→ 是 → 晶圆厂要扩产<br>→ 扩产要买设备<br>→ 我赚钱</code><br><br>这就是为什么你的159558叫<strong>"半导体设备ETF"</strong>——它投的不是赌哪颗芯片赢，而是赌整个行业要建更多的工厂。</div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">ASML / AMAT / 北方华创 / 中微</div>
+        <div class="text-xs text-blue-500 mt-2">市场规模 ~$1,330亿</div>
+      </div>
+      <div class="hidden md:flex items-center text-gray-600 text-xl">→</div>
+      <div class="flex-1 rounded-xl bg-cyan-500/5 border border-cyan-500/20 p-4 text-center">
+        <div class="text-2xl mb-2">🏭</div>
+        <div class="font-semibold text-cyan-400">
+          晶圆制造 (Fab)
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🏭 晶圆厂是干什么用的？</div><div class="tip-card-body">晶圆厂（Fab）就是<strong>"印钞厂"</strong>——把硅片变成芯片的超级工厂。<br><br>一座先进晶圆厂造价：<br><code>3nm晶圆厂建造成本<br>= $200-300亿美元<br>= 2个鸟巢 + 3个水立方<br>→ 地球上最贵的工厂</code><br><br>全球能造先进芯片的只有：<br>TSMC（台积电）> Samsung > Intel<br>中国最先进：SMIC（中芯国际）<br><br>晶圆厂买了设备后，就是设备公司的"客户"。<strong>客户越多 → 设备越好卖。</strong></div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">TSMC / Samsung / SMIC / Intel</div>
+        <div class="text-xs text-cyan-500 mt-2">市场规模 ~$5,000亿+</div>
+      </div>
+      <div class="hidden md:flex items-center text-gray-600 text-xl">→</div>
+      <div class="flex-1 rounded-xl bg-orange-500/5 border border-orange-500/20 p-4 text-center">
+        <div class="text-2xl mb-2">📦</div>
+        <div class="font-semibold text-orange-400">封装测试 (OSAT)</div>
+        <div class="text-xs text-gray-500 mt-1">ASE / JCET长电科技</div>
+        <div class="text-xs text-orange-500 mt-2">市场规模 ~$800亿</div>
+      </div>
+      <div class="hidden md:flex items-center text-gray-600 text-xl">→</div>
+      <div class="flex-1 rounded-xl bg-pink-500/5 border border-pink-500/20 p-4 text-center">
+        <div class="text-2xl mb-2">📱</div>
+        <div class="font-semibold text-pink-400">终端应用</div>
+        <div class="text-xs text-gray-500 mt-1">Apple / NVIDIA / 比亚迪</div>
+        <div class="text-xs text-pink-500 mt-2">万亿级市场</div>
+      </div>
+    </div>
+    <div class="text-center mt-6 text-xs text-gray-600">
+      💡 <strong class="text-blue-400/80">你的159558投在第②环</strong>——给全世界的晶圆厂卖机器。"不管谁造芯片，都要买我的设备。"
+    </div>
+  </div>
+
+  <!-- 设备细分 -->
+  <div class="glass rounded-2xl p-8">
+    <h3 class="font-bold mb-6 text-lg">设备里面又分7大工艺——每一项都是独立的战场</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="heat-cell rounded-xl p-4 cursor-pointer relative" style="background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);">
+        <div class="text-2xl mb-1">💡</div>
+        <div class="font-bold text-sm text-red-300">
+          光刻
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">💡 光刻：半导体最难的一步</div><div class="tip-card-body">光刻 = 用光把电路图"印"到硅片上，相当于<strong>在指甲盖上画一座城市</strong>。<br><br><strong>EUV光刻机：</strong>ASML全球独家，每台$2-3.5亿美元，是人类制造过的最精密机器。<br><code>EUV光源：极紫外光<br>波长13.5nm（头发丝的万分之一）<br>反射镜：德国蔡司制造<br>表面平整度：原子级别<br>→ 20年研发，€60亿投入</code><br><br>中国现状：<strong>光刻机国产化率 < 1%</strong>。上海微电子(SMEE)能造DUV但远落后于ASML。<br><br><em>这是"卡脖子"最严重的环节。</em></div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~24%</div>
+        <div class="text-xs text-red-400 mt-1">ASML垄断 · 国产<1%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer relative" style="background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3);">
+        <div class="text-2xl mb-1">⚡</div>
+        <div class="font-bold text-sm text-green-300">
+          刻蚀
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">⚡ 刻蚀：你的ETF第一大重仓</div><div class="tip-card-body">光刻把图案"印"上去后，<strong>刻蚀就是用化学气体把多余的部分"雕刻"掉</strong>，留下需要的电路。<br><br>制程越先进 → 需要的刻蚀步骤越多：<br><code>28nm芯片: ~30步刻蚀<br>5nm芯片: ~100+步刻蚀<br>→ 刻蚀设备需求翻3倍+</code><br><br><strong>中微公司（159558第一重仓14.89%）</strong>就是做刻蚀的，已进入5nm产线，累计出货6800+台反应器。<br><br>国产刻蚀份额约20-25%——在所有核心设备中，<strong>刻蚀是国产替代走得最远的</strong>。</div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~22%</div>
+        <div class="text-xs text-green-400 mt-1">中微/北方华创 · 国产~25%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer relative" style="background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3);">
+        <div class="text-2xl mb-1">🔬</div>
+        <div class="font-bold text-sm text-blue-300">
+          薄膜沉积
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🔬 薄膜沉积：在硅片上"镀膜"</div><div class="tip-card-body">芯片是<strong>一层一层堆叠</strong>出来的。薄膜沉积就是在硅片上"镀"一层极薄的材料（几个原子厚）。<br><br>三种主流技术：<br><code>CVD（化学气相沉积）<br>→ 拓荆科技的强项<br>PVD（物理气相沉积）<br>→ 北方华创的强项<br>ALD（原子层沉积）<br>→ 先进制程必需，壁垒最高</code><br><br>制程越先进 → 层数越多 → 沉积设备需求越大。5nm芯片需要80+层沉积！<br><br><strong>拓荆科技（159558第三重仓7.35%）</strong>是中国CVD龙头，已经在和中微、北方华创一起吃这块大蛋糕。</div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~22%</div>
+        <div class="text-xs text-blue-400 mt-1">拓荆/北方华创 · 国产~20%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer relative" style="background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.3);">
+        <div class="text-2xl mb-1">📏</div>
+        <div class="font-bold text-sm text-purple-300">
+          量测/检测
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📏 量测：为什么KLA毛利率高达61%？</div><div class="tip-card-body">芯片制造中，<strong>一颗坏芯片 = 全部报废</strong>（如果流片后才发现）。所以每一步都必须<strong>检测</strong>是否合格。<br><br>检测设备的作用：在制造过程中实时检查每一步有没有出错。<br><code>一片晶圆价值：$5000<br>如果到封装才发现缺陷<br>→ 损失$5000<br>如果用KLA设备在第一步就发现<br>→ 只损失$50<br>→ ROI = 100倍</code><br><br>这就是为什么KLA毛利率<strong>高达61%</strong>（全行业最高）——因为它的价值远超它的价格。<br><br>中国精测电子、中科飞测正在追赶，但份额还很低（<10%）。<br><br><em>检测是"国产替代最后的堡垒"——利润最高，替代最慢。</em></div></div></span>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~10%</div>
+        <div class="text-xs text-purple-400 mt-1">KLA垄断 · 国产<10%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer" style="background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2);">
+        <div class="text-2xl mb-1">💎</div>
+        <div class="font-bold text-sm text-amber-300">CMP抛光</div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~6%</div>
+        <div class="text-xs text-amber-400 mt-1">华海清科 · 国产~30%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer" style="background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.2);">
+        <div class="text-2xl mb-1">🧹</div>
+        <div class="font-bold text-sm text-cyan-300">清洗</div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~4%</div>
+        <div class="text-xs text-cyan-400 mt-1">盛美上海 · 国产~20%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer" style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15);">
+        <div class="text-2xl mb-1">⚛️</div>
+        <div class="font-bold text-sm text-gray-300">离子注入</div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~6%</div>
+        <div class="text-xs text-red-400 mt-1">AMAT垄断 · 国产~5%</div>
+      </div>
+      <div class="heat-cell rounded-xl p-4 cursor-pointer" style="background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.15);">
+        <div class="text-2xl mb-1">🔍</div>
+        <div class="font-bold text-sm text-gray-300">测试设备</div>
+        <div class="text-xs text-gray-500 mt-1">占设备价值 ~6%</div>
+        <div class="text-xs text-green-400 mt-1">长川科技 · 国产~18%</div>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
+      <p class="text-sm text-emerald-300/80">💡 <strong>关键发现：</strong>光刻机（ASML）占了最大价值但中国几乎进不去。但刻蚀、薄膜沉积、CMP——这些才是中国公司能吃到的蛋糕，也正好是159558的重仓方向。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ③ 为什么是"王冠" ==================== -->
+<section id="king" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">03</span>
+    <h2 class="text-2xl font-bold">
+      为什么设备是产业链的"王冠"？
+      <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">👑 "王冠"是什么意思？</div><div class="tip-card-body">在整个半导体产业链中，<strong>设备环节拥有最高的技术壁垒和最好的利润率</strong>——所以叫"王冠上的明珠"。<br><br>对比一下各环节的毛利率：<br><code>芯片设计（NVIDIA）: ~75%<br>设备（ASML/KLA）: 48-61%<br>晶圆代工（TSMC）: 53-57%<br>封装测试: 15-25%<br>───────────<br>设计虽高但波动极大<br>设备最稳定且最高之一</code><br><br>而且设备公司<strong>不受单一芯片客户绑定</strong>——TSMC、Samsung、Intel都得买它的设备。</div></div></span>
+    </h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- 理由1 -->
+    <div class="glass rounded-2xl p-6 card-hover">
+      <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-2xl mb-4">💰</div>
+      <h3 class="font-bold mb-2">极高的毛利率
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">💰 为什么设备公司能收这么高的毛利？</div><div class="tip-card-body">因为<strong>没有替代品</strong>。<br><br>ASML的EUV光刻机全球只有一家能造——你说多少钱就多少钱。<br><code>EUV光刻机价格：$2-3.5亿/台<br>毛利率：52.8%<br>→ 一台机器赚$1亿+<br>→ 每年卖200+台<br>→ 年赚€30亿+利润</code><br><br>KLA的检测设备毛利率更高达61%——因为"不检测就报废"，客户觉得太值了。<br><br>这种定价权，苹果都要羡慕。</div></div></span>
+      </h3>
+      <div class="text-3xl font-bold text-emerald-400 mb-2">48-61%</div>
+      <p class="text-sm text-gray-400">全球五大设备商的毛利率区间。KLA以61%居首，ASML 52.8%，AMAT 48%。</p>
+      <p class="text-xs text-gray-500 mt-2">作为对比：A股半导体设备公司毛利约35-45%，还有提升空间。</p>
+    </div>
+
+    <!-- 理由2 -->
+    <div class="glass rounded-2xl p-6 card-hover">
+      <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-2xl mb-4">🧱</div>
+      <h3 class="font-bold mb-2">极端的技术壁垒
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🧱 "20年+€60亿"意味着什么？</div><div class="tip-card-body">ASML的EUV光刻机从1990年代开始研发，<strong>2020年才量产</strong>——花了20多年。<br><br>投入超过€60亿，涉及5000+家供应商。<br><br>这意味着：<br><code>即使你今天开始研发<br>→ 20年后才能追上ASML<br>→ 但ASML又往前走了20年<br>→ 永远追不上</code><br><br>这就是为什么光刻机国产化率<1%——不是不努力，是真的太难了。<br><br>但刻蚀、清洗、CMP这些环节壁垒相对低，中国公司已经追上了。<strong>这就是159558的机会。</strong></div></div></span>
+      </h3>
+      <div class="text-3xl font-bold text-blue-400 mb-2">20年+</div>
+      <p class="text-sm text-gray-400">ASML EUV研发耗时20+年，投入€60亿+，涉及5000+家供应商。新进入者根本无法复制。</p>
+      <p class="text-xs text-gray-500 mt-2">每个细分领域只有1-3家玩家——这不是巧合，是技术壁垒的必然结果。</p>
+    </div>
+
+    <!-- 理由3 -->
+    <div class="glass rounded-2xl p-6 card-hover">
+      <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-2xl mb-4">⛏️</div>
+      <h3 class="font-bold mb-2">"卖铲人"模式
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">⛏️ "卖铲人"为什么比"淘金者"更稳？</div><div class="tip-card-body">淘金者可能血本无归，但卖铲子的稳赚不赔——<strong>因为每个淘金者都需要铲子</strong>。<br><br>半导体也一样：<br><code>NVIDIA vs AMD vs Intel<br>谁赢谁输不知道<br>但它们都要建晶圆厂<br>→ 都要买设备<br>→ 设备公司通吃</code><br><br>更妙的是，设备一旦进入一条产线，<strong>后续的维护、升级、备件</strong>都是持续收入。<br><br>一台设备卖$1亿，后续20年的服务费又是$5000万——<strong>一次性获客，终身收钱。</strong></div></div></span>
+      </h3>
+      <div class="text-3xl font-bold text-amber-400 mb-2">通吃</div>
+      <p class="text-sm text-gray-400">不管NVIDIA、AMD、还是Intel在AI大战中谁赢——它们都需要买设备。设备公司不赌谁赢。</p>
+      <p class="text-xs text-gray-500 mt-2">加上设备维护和备件收入，客户终身价值远超首次采购价。</p>
+    </div>
+
+    <!-- 理由4 -->
+    <div class="glass rounded-2xl p-6 card-hover">
+      <div class="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center text-2xl mb-4">🔄</div>
+      <h3 class="font-bold mb-2">制程迭代 = 新需求
+        <span class="tip tip-right"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🔄 每一代新芯片 = 设备公司一波收入</div><div class="tip-card-body">芯片制程从28nm → 14nm → 7nm → 5nm → 3nm → 2nm...<br><br>每一代新制程都需要<strong>全新的设备</strong>——旧设备做不了新工艺。<br><br>而且制程越先进，需要的步骤越多：<br><code>28nm: ~60步<br>5nm: ~100步<br>2nm: ~150步+<br>───────────<br>步骤越多<br>→ 每台设备使用次数越多<br>→ 需要的设备台数越多<br>→ 设备公司赚更多</code><br><br>这就是为什么ASML、AMAT、北方华创的订单总是在涨——只要人类还在追求更强的芯片，它们就一直在赚钱。</div></div></span>
+      </h3>
+      <div class="text-3xl font-bold text-pink-400 mb-2">永续</div>
+      <p class="text-sm text-gray-400">从28nm到2nm，每一代制程都需要新设备。步骤数从60步增到150步+——设备需求指数级增长。</p>
+      <p class="text-xs text-gray-500 mt-2">摩尔定律不停 → 设备需求不停 → 这是一门"永远在更新"的生意。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ④ 你的ETF ==================== -->
+<section id="etf" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">04</span>
+    <h2 class="text-2xl font-bold">你买的159558到底是什么？</h2>
+  </div>
+  <p class="text-gray-400 mb-10 max-w-2xl">先把"你手里拿的东西"搞清楚——这是最基本也是最重要的。</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-8">
+    <div class="glass rounded-2xl p-6">
+      <div class="text-xs text-gray-500 mb-1">全称</div>
+      <div class="text-sm font-semibold text-blue-400">易方达中证半导体材料设备主题ETF</div>
+      <div class="text-xs text-gray-500 mt-2 mb-4">代码 159558 · 成立 2024.06.06</div>
+      <div class="space-y-2 text-xs text-gray-400">
+        <div>📊 跟踪指数：<strong class="text-gray-300">中证半导体材料设备指数 (931743)</strong></div>
+        <div>💰 最新规模：<strong class="text-emerald-400">~75-93亿元</strong></div>
+        <div>📐 夏普比率：<strong class="text-amber-400">3.74</strong>（优于94%同类）</div>
+        <div>📉 最大回撤：<strong class="text-red-400">19.24%</strong></div>
+        <div>📈 规模增长：<strong class="text-gray-300">4.8亿→93亿（一年涨19倍）</strong></div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
+        <p class="text-xs text-emerald-300/80">⚡ 一年从4.8亿到93亿——<strong>资金在疯狂涌入</strong>。</p>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-6 md:col-span-2">
+      <h3 class="font-bold mb-4 text-lg">核心定位：纯"卖铲人"策略
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🎯 159558 和其他半导体ETF最大的区别</div><div class="tip-card-body">市面上有好几个半导体ETF，但<strong>只有159558是纯设备和材料</strong>：<br><br><code>159558: 只投设备+材料公司<br>→ 不含任何芯片设计公司<br>→ 纯"卖铲人"<br><br>512480: 全产业链<br>→ 含设计+制造+设备+封测<br>→ 什么都有一点<br><br>159995: 芯片设计为主<br>→ 韦尔股份、兆易创新等<br>→ 赌芯片卖得好</code><br><br>159558的押注逻辑：<strong>"不管谁造芯片，反正都要买设备"</strong>——更确定，但也更集中。<br><br>前十大持仓集中度64.6%，比512480高很多 → <strong>波动更大，弹性更强</strong>。</div></div></span>
+      </h3>
+      <div class="space-y-3">
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-800/50">
+          <span class="text-emerald-400 text-lg">✅</span>
+          <div class="text-sm">
+            <strong class="text-gray-200">不含芯片设计公司</strong>（如韦尔股份、寒武纪），纯粹投上游设备+材料
+            <span class="text-xs text-gray-500 block mt-1">→ 不赌"哪颗芯片卖得好"，只赌"行业在扩产"</span>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-800/50">
+          <span class="text-blue-400 text-lg">✅</span>
+          <div class="text-sm">
+            <strong class="text-gray-200">高度集中</strong>，前十大持仓占64.6%
+            <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📊 集中度64.6%是好事还是坏事？</div><div class="tip-card-body"><strong>双刃剑：</strong><br><br>✅ 好处：集中度高 = 弹性大 = 涨的时候更猛<br>❌ 坏处：集中度高 = 波动大 = 跌的时候也更狠<br><code>当半导体板块大涨时：<br>159558 > 512480 > 宽基指数<br>因为钱集中在少数龙头上<br><br>当板块大跌时：<br>159558 < 512480 < 宽基指数<br>因为所有龙头一起跌</code><br><br>这就是为什么你的ETF日内波动5-6%是常态——<strong>集中度太高了</strong>。<br><br><em>对短线交易者：波动大 = 机会多<br>对长线持有者：波动大 = 考验心脏</em></div></div></span>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-800/50">
+          <span class="text-amber-400 text-lg">✅</span>
+          <div class="text-sm">
+            <strong class="text-gray-200">规模一年暴涨19倍</strong>（4.8亿→93亿），说明聪明钱在涌入
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/10">
+          <span class="text-red-400 text-lg">⚠️</span>
+          <div class="text-sm">
+            <strong class="text-red-300">注意</strong>：成立于2024年6月，历史不到2年——没有经历过完整的"硅周期下行"，回撤数据可能不够充分
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 前十大持仓 -->
+  <div class="glass rounded-2xl p-8">
+    <h3 class="font-bold mb-6 text-lg">📋 159558 前十大持仓（你到底买的是什么？）</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-gray-500 text-xs border-b border-white/10">
+            <th class="text-left py-2 pr-4">排名</th>
+            <th class="text-left py-2 pr-4">公司</th>
+            <th class="text-left py-2 pr-4">权重</th>
+            <th class="text-left py-2 pr-4">做什么</th>
+            <th class="text-left py-2 pr-4">类比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-emerald-400 font-bold">①</td>
+            <td class="py-3 font-semibold">中微公司</td>
+            <td class="py-3 text-emerald-400 font-bold">14.89%</td>
+            <td class="py-3 text-gray-400">刻蚀设备龙头</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版Lam Research"</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-blue-400 font-bold">②</td>
+            <td class="py-3 font-semibold">北方华创</td>
+            <td class="py-3 text-blue-400 font-bold">12.86%</td>
+            <td class="py-3 text-gray-400">平台型设备（刻蚀+沉积+热处理）</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版AMAT"</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-purple-400 font-bold">③</td>
+            <td class="py-3 font-semibold">拓荆科技</td>
+            <td class="py-3 text-purple-400 font-bold">7.35%</td>
+            <td class="py-3 text-gray-400">薄膜沉积（CVD/ALD）</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版ASM Intl"</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-cyan-400 font-bold">④</td>
+            <td class="py-3 font-semibold">长川科技</td>
+            <td class="py-3 text-cyan-400 font-bold">6.35%</td>
+            <td class="py-3 text-gray-400">测试设备（测试机/分选机）</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版Teradyne"</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-amber-400 font-bold">⑤</td>
+            <td class="py-3 font-semibold">华海清科</td>
+            <td class="py-3 text-amber-400 font-bold">5.08%</td>
+            <td class="py-3 text-gray-400">CMP抛光（国内唯一12寸供应商）</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版AMAT CMP"</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-gray-400">⑥</td>
+            <td class="py-3 text-gray-300">沪硅产业</td>
+            <td class="py-3 text-gray-400">~4.5%</td>
+            <td class="py-3 text-gray-400">硅片材料</td>
+            <td class="py-3 text-gray-500 text-xs">上游材料</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-gray-400">⑦</td>
+            <td class="py-3 text-gray-300">中科飞测</td>
+            <td class="py-3 text-gray-400">~3.5%</td>
+            <td class="py-3 text-gray-400">检测设备</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版KLA"（初期）</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-gray-400">⑧</td>
+            <td class="py-3 text-gray-300">安集科技</td>
+            <td class="py-3 text-gray-400">~3%</td>
+            <td class="py-3 text-gray-400">CMP抛光液</td>
+            <td class="py-3 text-gray-500 text-xs">耗材</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="py-3 text-gray-400">⑨</td>
+            <td class="py-3 text-gray-300">芯源微</td>
+            <td class="py-3 text-gray-400">~2.5%</td>
+            <td class="py-3 text-gray-400">涂胶显影设备</td>
+            <td class="py-3 text-gray-500 text-xs">国产替代初期</td>
+          </tr>
+          <tr class="hover:bg-white/5">
+            <td class="py-3 text-gray-400">⑩</td>
+            <td class="py-3 text-gray-300">盛美上海</td>
+            <td class="py-3 text-gray-400">~2.5%</td>
+            <td class="py-3 text-gray-400">清洗设备</td>
+            <td class="py-3 text-gray-500 text-xs">"中国版DNS"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-blue-500/5 border border-blue-500/15">
+      <p class="text-sm text-blue-300/80">💡 <strong>关键认知：</strong>你的ETF前两大持仓（中微+北方华创）合计27.75%——<strong>你买的其实是"中微+北方华创"的杠杆版</strong>。它们的涨跌决定了你的盈亏。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑤ 五大龙头 ==================== -->
+<section id="companies" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">05</span>
+    <h2 class="text-2xl font-bold">你的五大重仓公司：逐一搞懂</h2>
+  </div>
+  <p class="text-gray-400 mb-10 max-w-2xl">前五大持仓占159558的46.5%——搞懂这5家公司，就搞懂了你赚的钱从哪来。</p>
+
+  <div class="space-y-6">
+    <!-- 中微公司 -->
+    <div class="glass rounded-2xl p-6 md:p-8 card-hover">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-14 h-14 rounded-xl bg-emerald-500/10 flex items-center justify-center text-2xl flex-shrink-0">⚡</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h3 class="text-xl font-bold">中微公司 (688012)</h3>
+            <span class="px-2 py-0.5 rounded-full text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">ETF第一重仓 14.89%</span>
+          </div>
+          <p class="text-sm text-gray-400 mt-1">中国刻蚀设备龙头 · "中国版Lam Research"</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">2025年营收</div>
+          <div class="text-lg font-bold text-emerald-400">123.85亿 (+36.6%)</div>
+          <div class="text-xs text-gray-500 mt-1">刻蚀收入98.32亿</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">技术实力
+            <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">⚡ 中微的刻蚀技术有多强？</div><div class="tip-card-body">中微的CCP刻蚀机已经进入<strong>5nm逻辑芯片和3D NAND</strong>产线——这意味着它达到了全球先进制程的门槛。<br><br>累计出货6800+台反应器，其中CCP刻蚀机年出货超过1000台。<br><code>2012年: 进入28nm产线<br>2017年: 进入14nm产线<br>2020年: 进入7nm产线<br>2023年: 进入5nm产线<br>───────────<br>每一代制程<br>→ 都需要新的刻蚀参数<br>→ 中微一直在追</code><br><br>在全球刻蚀市场份额约3%——不大，但这是<strong>唯一进入先进制程的中国设备公司</strong>。</div></div></span>
+          </div>
+          <div class="text-lg font-bold text-emerald-400">进入5nm产线</div>
+          <div class="text-xs text-gray-500 mt-1">累计出货6800+台反应器</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">投资逻辑</div>
+          <div class="text-sm font-semibold text-gray-300">刻蚀是国产替代走得最远的核心环节，制程迭代不断推升需求</div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/10">
+        <p class="text-xs text-emerald-300/70">🔑 <strong>一句话记住：</strong>中微做"雕刻刀"——芯片里越精细的线条，越需要中微的刻蚀机。制程越先进，它越值钱。</p>
+      </div>
+    </div>
+
+    <!-- 北方华创 -->
+    <div class="glass rounded-2xl p-6 md:p-8 card-hover">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-2xl flex-shrink-0">🏗️</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h3 class="text-xl font-bold">北方华创 (002371)</h3>
+            <span class="px-2 py-0.5 rounded-full text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">ETF第二重仓 12.86%</span>
+          </div>
+          <p class="text-sm text-gray-400 mt-1">中国最大的半导体设备平台公司 · "中国版AMAT"</p>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">2025年营收</div>
+          <div class="text-lg font-bold text-blue-400">~400亿+ (+35%)</div>
+          <div class="text-xs text-gray-500 mt-1">行业最高 · 净利润~55亿</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">产品线
+            <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🏗️ 什么叫"平台型"公司？</div><div class="tip-card-body">北方华创做<strong>很多种设备</strong>：刻蚀、CVD、PVD、ALD、热处理、清洗、离子注入...几乎覆盖前道工艺的所有环节。<br><br>这叫"平台型"——类似应用材料(AMAT)的模式。<br><code>平台型的优势：<br>✅ 一条产线可以买你很多设备<br>✅ 客户粘性极强<br>✅ 抗周期能力好<br><br>平台型的劣势：<br>❌ 每个单品不如专精公司强<br>❌ 研发分散<br><br>但中国市场偏好平台型<br>→ 因为"大而全"在中国更受追捧</code><br><br>北方华创市值约2000亿元——<strong>A股半导体设备之王</strong>。</div></div></span>
+          </div>
+          <div class="text-lg font-bold text-blue-400">最全产品线</div>
+          <div class="text-xs text-gray-500 mt-1">薄膜>100亿 · 刻蚀>80亿</div>
+        </div>
+        <div class="p-4 rounded-xl bg-gray-800/50">
+          <div class="text-xs text-gray-500 mb-1">投资逻辑</div>
+          <div class="text-sm font-semibold text-gray-300">产品最全 = 客户粘性最强 = 行业β最大的受益者</div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 rounded-lg bg-blue-500/5 border border-blue-500/10">
+        <p class="text-xs text-blue-300/70">🔑 <strong>一句话记住：</strong>北方华创做"超市"——晶圆厂想要的设备它都卖。不管买什么，都有它一份。</p>
+      </div>
+    </div>
+
+    <!-- 拓荆 + 长川 + 华海清科 精简版 -->
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass rounded-2xl p-6 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-2xl mb-4">🔬</div>
+        <div class="flex items-center gap-2 mb-2">
+          <h3 class="font-bold">拓荆科技</h3>
+          <span class="px-2 py-0.5 rounded-full text-xs bg-purple-500/10 text-purple-400">7.35%</span>
+        </div>
+        <p class="text-xs text-gray-400 mb-4">薄膜沉积龙头 · "中国版ASM International"</p>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between"><span class="text-gray-500">2025营收</span><span class="text-purple-400 font-bold">65.19亿</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">核心产品</span><span class="text-gray-300">PECVD/PVD/ALD</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">国产化率</span><span class="text-purple-400">~20%→30%+</span></div>
+        </div>
+        <div class="mt-3 p-2 rounded-lg bg-purple-500/5">
+          <p class="text-xs text-purple-300/60">🔑 做"镀膜机"——芯片层数越多，它越值钱</p>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-2xl mb-4">🔍</div>
+        <div class="flex items-center gap-2 mb-2">
+          <h3 class="font-bold">长川科技</h3>
+          <span class="px-2 py-0.5 rounded-full text-xs bg-cyan-500/10 text-cyan-400">6.35%</span>
+        </div>
+        <p class="text-xs text-gray-400 mb-4">测试设备龙头 · 分选机/测试机</p>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between"><span class="text-gray-500">核心产品</span><span class="text-gray-300">测试机+分选机</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">国产化率</span><span class="text-cyan-400">~18%→25%+</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">类比</span><span class="text-gray-300">"中国版Teradyne"</span></div>
+        </div>
+        <div class="mt-3 p-2 rounded-lg bg-cyan-500/5">
+          <p class="text-xs text-cyan-300/60">🔑 做"质检员"——每颗芯片出厂前都要过它这一关</p>
+        </div>
+      </div>
+      <div class="glass rounded-2xl p-6 card-hover">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-2xl mb-4">💎</div>
+        <div class="flex items-center gap-2 mb-2">
+          <h3 class="font-bold">华海清科</h3>
+          <span class="px-2 py-0.5 rounded-full text-xs bg-amber-500/10 text-amber-400">5.08%</span>
+        </div>
+        <p class="text-xs text-gray-400 mb-4">CMP抛光设备 · 国内12寸唯一供应商</p>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between"><span class="text-gray-500">核心产品</span><span class="text-gray-300">CMP化学机械抛光</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">国产化率</span><span class="text-amber-400">~30%→45%+</span></div>
+          <div class="flex justify-between"><span class="text-gray-500">地位</span><span class="text-amber-400">国内独家</span></div>
+        </div>
+        <div class="mt-3 p-2 rounded-lg bg-amber-500/5">
+          <p class="text-xs text-amber-300/60">🔑 做"打磨机"——每一层芯片都要磨平才能继续叠加</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五大龙头 vs 全球 -->
+  <div class="mt-8 glass rounded-2xl p-6">
+    <h3 class="font-bold mb-4 text-lg">中国五大 vs 全球五大——差距有多大？</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <div class="text-xs text-emerald-400 mb-2 font-bold">🇨🇳 中国（你的ETF持仓）</div>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between p-2 rounded-lg bg-emerald-500/5">
+            <span>北方华创</span><span class="text-emerald-400">~¥400亿 ($55亿)</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-lg bg-emerald-500/5">
+            <span>中微公司</span><span class="text-emerald-400">¥124亿 ($17亿)</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-lg bg-emerald-500/5">
+            <span>拓荆科技</span><span class="text-emerald-400">¥65亿 ($9亿)</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="text-xs text-blue-400 mb-2 font-bold">🌍 全球（你的竞争对手）</div>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between p-2 rounded-lg bg-blue-500/5">
+            <span>ASML（荷兰）</span><span class="text-blue-400">$350亿</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-lg bg-blue-500/5">
+            <span>AMAT（美国）</span><span class="text-blue-400">$284亿</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-lg bg-blue-500/5">
+            <span>Lam Research（美国）</span><span class="text-blue-400">$200亿</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-amber-500/5 border border-amber-500/15">
+      <p class="text-sm text-amber-300/80">
+        ⚡ <strong>差距 = 机会：</strong>北方华创营收是AMAT的1/5，中微是Lam的85%——看起来差距在缩小。但记住：<strong>收入不等于技术</strong>。中国设备主要用在成熟制程（28nm+），先进制程仍有巨大差距。这个差距，就是未来5-10年的成长空间。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑥ 硅周期 ==================== -->
+<section id="cycle" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">06</span>
+    <h2 class="text-2xl font-bold">
+      半导体周期：现在在什么位置？
+      <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🔄 什么是"硅周期"？</div><div class="tip-card-body">半导体行业有一个极强的<strong>3-4年周期性</strong>——叫"硅周期"。<br><br>它的形成机制：<br><code>需求暴增 → 芯片涨价<br>→ 厂商拼命扩产（建晶圆厂）<br>→ 2年后新产能释放<br>→ 但需求可能已经回落<br>→ 供过于求 → 价格暴跌<br>→ 减产裁员 → 库存出清<br>→ 然后新一轮需求来了<br>→ 循环往复</code><br><br>这个周期对设备公司尤其重要——因为<strong>设备订单是扩产的直接受益者</strong>。周期上行时设备公司最先受益，周期下行时它们也最先被砍单。<br><br><em>你的159558就是"周期放大器"。</em></div></div></span>
+    </h2>
+  </div>
+
+  <!-- 历史周期 -->
+  <div class="glass rounded-2xl p-8 mb-8">
+    <h3 class="font-bold mb-6 text-lg">📅 历史周期复盘：半导体从不"一直涨"</h3>
+    <div class="space-y-3">
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/15">
+        <span class="text-xs font-bold text-red-400 w-20 flex-shrink-0">2018-2019</span>
+        <span class="text-gray-600">→</span>
+        <span class="text-sm text-gray-400 flex-1">贸易战+存储芯片过剩 → SOX暴跌~20%</span>
+        <span class="text-xs text-red-400">下行 🔻</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-green-500/5 border border-green-500/15">
+        <span class="text-xs font-bold text-green-400 w-20 flex-shrink-0">2020-2021</span>
+        <span class="text-gray-600">→</span>
+        <span class="text-sm text-gray-400 flex-1">COVID远程办公+汽车芯片短缺 → <strong class="text-green-400">超级周期</strong></span>
+        <span class="text-xs text-green-400">上行 🚀</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/15">
+        <span class="text-xs font-bold text-red-400 w-20 flex-shrink-0">2022-2023</span>
+        <span class="text-gray-600">→</span>
+        <span class="text-sm text-gray-400 flex-1">加息+消费电子崩塌+库存堆积 → SOX暴跌<strong class="text-red-400">-35%</strong></span>
+        <span class="text-xs text-red-400">下行 🔻🔻</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-green-500/5 border border-green-500/15">
+        <span class="text-xs font-bold text-green-400 w-20 flex-shrink-0">2024-2026</span>
+        <span class="text-gray-600">→</span>
+        <span class="text-sm text-gray-400 flex-1">ChatGPT引爆AI → HBM+先进封装+设备需求暴增</span>
+        <span class="text-xs text-green-400">AI超级周期 🚀🚀</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-amber-500/5 border border-amber-500/20">
+        <span class="text-xs font-bold text-amber-400 w-20 flex-shrink-0">2026年中</span>
+        <span class="text-gray-600">→</span>
+        <span class="text-sm text-gray-400 flex-1">
+          <strong class="text-amber-400">你在这里：</strong>AI超级周期中后段——强劲，但风险信号增多
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">⚖️ 为什么说"中后段"？</div><div class="tip-card-body">判断依据：<br><br><strong>✅ 还在涨的证据：</strong><br>• 全球芯片销售迈向$1万亿<br>• HBM严重短缺（美光2026全年售罄）<br>• 台积电CapEx创历史新高<br><br><strong>⚠️ 接近顶部的信号：</strong><br>• SOX一度高于200日均线62%（极端）<br>• 全球CapEx+20%→可能产能过剩<br>• 指数PE一度达118倍<br>• AI芯片出货量<0.2%但贡献50%收入<br><code>结论：不是马上崩<br>但"闭眼买都赚"的阶段<br>已经过去了</code></div></div></span>
+        </span>
+        <span class="text-xs text-amber-400">⚠️ 当前</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 周期指标 -->
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="glass rounded-2xl p-6">
+      <h3 class="font-bold mb-3 text-emerald-400">📈 领先指标
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📈 为什么领先指标最重要？</div><div class="tip-card-body">领先指标能<strong>提前6-12个月</strong>告诉你行业方向。<br><br>如果你看到Book-to-Bill从>1.0跌破1.0——意味着设备订单开始减少——6个月后整个行业会感受到寒意。<br><code>2021年Q4: Book-to-Bill见顶<br>2022年Q2: 开始下滑<br>2022年Q4: 行业崩盘<br>───────────<br>提前一年的信号！</code><br><br>这就是为什么专业投资者每周看SEMI数据——它就是半导体行业的"天气预报"。</div></div></span>
+      </h3>
+      <p class="text-xs text-gray-500 mb-3">提前6-12个月给出信号</p>
+      <div class="space-y-2 text-xs text-gray-400">
+        <div>• <strong>Book-to-Bill</strong>：订单出货比，>1.0=好</div>
+        <div>• <strong>CapEx指引</strong>：台积电/三星的资本开支计划</div>
+        <div>• <strong>台积电月营收</strong>：领先全行业1-2月</div>
+        <div>• <strong>SOX费城半导体指数</strong>：领先基本面1-2季度</div>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-6">
+      <h3 class="font-bold mb-3 text-blue-400">📊 同步指标</h3>
+      <p class="text-xs text-gray-500 mb-3">当期反映行业冷暖</p>
+      <div class="space-y-2 text-xs text-gray-400">
+        <div>• <strong>产能利用率</strong>：当前~76%，
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📊 怎么看产能利用率？</div><div class="tip-card-body"><strong>>85% = 偏热</strong>（扩产压力大）<br><strong>75-85% = 正常</strong><br><strong><75% = 偏冷</strong>（产能过剩）<br><br>当前~76%，看似正常，但<strong>结构性分化严重</strong>：<br><code>先进制程（3nm/2nm）<br>→ 利用率接近100%（满产！）<br><br>成熟制程（28nm+）<br>→ 利用率~70%（偏冷）<br><br>你的ETF持仓公司<br>→ 主要服务成熟制程<br>→ 受利用率偏低影响</code><br><br>这就是为什么国产替代如此重要——成熟制程也要用设备，而且是中国设备公司的主战场。</div></div></span>
+        </div>
+        <div>• <strong>行业营收增速</strong>：2026E +26%~53%</div>
+        <div>• <strong>芯片ASP</strong>：存储芯片4个月涨4倍</div>
+        <div>• <strong>终端需求</strong>：AI服务器供不应求</div>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-6">
+      <h3 class="font-bold mb-3 text-red-400">📉 滞后指标</h3>
+      <p class="text-xs text-gray-500 mb-3">确认周期拐点（但已晚了）</p>
+      <div class="space-y-2 text-xs text-gray-400">
+        <div>• <strong>库存天数</strong>：正常60-80天，>100天危险</div>
+        <div>• <strong>EPS修正</strong>：分析师上调/下调</div>
+        <div>• <strong>裁员/减产公告</strong>：看到时已经晚了</div>
+        <div>• <strong>实际CapEx执行率</strong>：vs 年初计划</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 当前周期位置 -->
+  <div class="mt-8 glass rounded-2xl p-8" style="box-shadow: 0 0 30px rgba(251,191,36,0.1);">
+    <h3 class="font-bold mb-4 text-lg">🎯 当前周期定位：AI超级周期中后段</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <div class="text-sm font-bold text-green-400 mb-3">✅ 支持继续上行的证据</div>
+        <div class="space-y-2 text-xs text-gray-400">
+          <div>• 全球芯片销售迈向$1万亿（WSTS预测2026年$975B）</div>
+          <div>• HBM严重短缺，美光2026全年产能已售罄</div>
+          <div>• 台积电2026 CapEx $520-560亿（历史最高）</div>
+          <div>• 三星CapEx同比+128%</div>
+          <div>• 中国设备国产化率从25%→50%目标</div>
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-bold text-red-400 mb-3">⚠️ 接近顶部的风险信号</div>
+        <div class="space-y-2 text-xs text-gray-400">
+          <div>• SOX一度62%高于200日均线（BofA警告极端背离）</div>
+          <div>• 全球CapEx+20%达$2,000亿——<strong>产能过剩风险</strong></div>
+          <div>• 指数PE一度达118倍——<strong>估值泡沫风险</strong></div>
+          <div>• AI芯片出货量<0.2%但贡献50%收入——<strong>单一依赖</strong></div>
+          <div>• 前10大芯片公司市值$9.5万亿（2年涨181%）</div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-amber-500/5 border border-amber-500/20">
+      <p class="text-sm text-amber-300/90">
+        <strong>翻译成人话：</strong>行业还在涨，但"闭眼买都赚"的阶段已经过去了。接下来需要<strong>更精准的择时和更严格的纪律</strong>——这就是这篇指南存在的意义。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑦ 风险地图 ==================== -->
+<section id="risks" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">07</span>
+    <h2 class="text-2xl font-bold">风险地图：什么会让你亏钱？</h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-red-500">
+      <div class="text-2xl mb-3">🔄</div>
+      <h3 class="font-bold mb-2 text-red-400">
+        周期下行
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🔴 最核心的风险</div><div class="tip-card-body">半导体<strong>从来没有"一直涨"</strong>。上一次2022年SOX暴跌-35%。<br><br>周期下行的传导链：<br><code>AI需求放缓<br>→ 芯片库存堆积<br>→ 晶圆厂砍产能<br>→ 停止买设备<br>→ 设备公司订单暴跌<br>→ 股价腰斩</code><br><br>对设备公司来说，周期下行比芯片设计公司更惨——因为<strong>设备订单是"可选消费"</strong>，晶圆厂可以先不买、用旧的。<br><br>2022年北方华创从高点回撤超过40%。<br><br><em>这是你最大的风险。</em></div></div></span>
+      </h3>
+      <p class="text-sm text-gray-400">硅周期下行 → 设备订单骤减 → 股价暴跌。2022年SOX跌35%，北方华创回撤超40%。</p>
+      <div class="mt-3 text-xs text-red-400 font-mono">影响等级: ⭐⭐⭐⭐⭐</div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-orange-500">
+      <div class="text-2xl mb-3">🏭</div>
+      <h3 class="font-bold mb-2 text-orange-400">
+        产能过剩
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🏭 2027年会不会产能过剩？</div><div class="tip-card-body">台积电2026年CapEx $520-560亿、三星+128%、全球CapEx+20%达$2,000亿——<strong>这么多新工厂同时在建</strong>。<br><br>如果2027年AI需求增速放缓：<br><code>新产能集中释放<br>→ 芯片供给暴增<br>→ 但需求没跟上<br>→ 价格暴跌<br>→ 设备订单断崖<br><br>类似2007-2008年存储芯片崩盘</code><br><br>历史上的教训：每次"这次不一样"之后，都跟着一次惨烈的产能过剩。<br><br><em>关键观察点：2027年AI芯片需求能否消化这些新增产能。</em></div></div></span>
+      </h3>
+      <p class="text-sm text-gray-400">全球CapEx+20%，$2,000亿规模前所未有。若2027年AI需求放缓，可能重演2022-2023。</p>
+      <div class="mt-3 text-xs text-orange-400 font-mono">影响等级: ⭐⭐⭐⭐</div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-purple-500">
+      <div class="text-2xl mb-3">🌐</div>
+      <h3 class="font-bold mb-2 text-purple-400">
+        地缘政治
+        <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🌐 中美博弈的双刃剑</div><div class="tip-card-body">地缘政治对你来说是<strong>双刃剑</strong>：<br><br><strong>利好面：</strong><br>美国禁运先进设备 → 中国只能买国产 → 设备公司订单暴增<br><br><strong>利空面：</strong><br>如果美国制裁升级到零部件层面 → 中国设备公司可能断供<br><code>2022年10月: 禁EUV<br>2023年10月: 禁先进DUV<br>2025年3月: 扩大实体清单<br>→ 每次制裁<br>→ 国产替代逻辑加强<br>→ 但技术追赶变难</code><br><br>总体上<strong>短期利好、长期不确定</strong>。<br><br><em>这是你无法控制的风险，只能通过仓位管理来应对。</em></div></div></span>
+      </h3>
+      <p class="text-sm text-gray-400">双刃剑：禁运利好国产替代，但技术封锁可能限制发展空间。不可控，只能管理仓位。</p>
+      <div class="mt-3 text-xs text-purple-400 font-mono">影响等级: ⭐⭐⭐</div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-yellow-500">
+      <div class="text-2xl mb-3">📊</div>
+      <h3 class="font-bold mb-2 text-yellow-400">
+        估值过高
+        <span class="tip tip-right"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">📊 PE 118倍意味着什么？</div><div class="tip-card-body">市盈率(PE) = 股价 / 每股收益。PE越高，说明市场愿意为每$1利润付越多钱。<br><br>中证半导体材料设备指数PE一度达到<strong>118倍</strong>——意味着你花$118买$1的年利润。<br><code>正常科技公司PE: 20-40倍<br>热门赛道PE: 40-80倍<br>118倍 = 极端泡沫区域<br>───────────<br>如果利润增速放缓<br>→ PE从118回落到40<br>→ 股价要跌 66%！<br>（即使利润不变）</code><br><br>这就是"杀估值"——不是公司变差了，而是市场不愿意再付那么高的溢价。<br><br>2021年底SOX估值峰值后，2022年就-35%。</div></div></span>
+      </h3>
+      <p class="text-sm text-gray-400">指数PE一度达118倍。周期下行时可快速回落至15-25倍——纯杀估值就能腰斩。</p>
+      <div class="mt-3 text-xs text-yellow-400 font-mono">影响等级: ⭐⭐⭐⭐</div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-cyan-500">
+      <div class="text-2xl mb-3">⚡</div>
+      <h3 class="font-bold mb-2 text-cyan-400">技术颠覆</h3>
+      <p class="text-sm text-gray-400">Chiplet/先进封装/硅光子等新技术可能改变设备需求结构。但对国产替代影响有限——中国主要做成熟制程。</p>
+      <div class="mt-3 text-xs text-cyan-400 font-mono">影响等级: ⭐⭐</div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover border-l-2 border-gray-500">
+      <div class="text-2xl mb-3">📉</div>
+      <h3 class="font-bold mb-2 text-gray-400">集中度风险</h3>
+      <p class="text-sm text-gray-400">前两大持仓（中微+北方华创）占27.75%。如果其中一家出问题（如业绩暴雷），ETF会大跌。</p>
+      <div class="mt-3 text-xs text-gray-400 font-mono">影响等级: ⭐⭐⭐</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑧ 操作方案 ==================== -->
+<section id="action" class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">08</span>
+    <h2 class="text-2xl font-bold">认知升级后的操作方案</h2>
+  </div>
+  <p class="text-gray-400 mb-10 max-w-2xl">现在你懂了产业链、周期、风险——下一步该怎么做？</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-8">
+    <div class="glass rounded-2xl p-6 card-hover glow-green">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-2xl">🟢</span>
+        <h3 class="font-bold text-green-400">场景A：周期继续</h3>
+      </div>
+      <div class="text-xs text-gray-400 mb-4 p-3 rounded-lg bg-gray-800/50">
+        <strong>条件：</strong>AI需求持续超预期 · Book-to-Bill>1.1 · 台积电月营收创新高
+      </div>
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">持有为主，回调5-8%加仓</span></div>
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">每次高开3%+，卖1/2后设回落止盈
+          <span class="tip"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">✅ 上次的教训别再犯</div><div class="tip-card-body">6/12你赚了660元，但没设回落止盈，剩余1500股从3.35滑到3.147。<br><br><strong>高开后的标准操作：</strong><br><code>Step 1: 卖1/2~2/3<br>Step 2: 剩余立刻设回落止盈<br>  高开3-5%: 回落3%卖<br>  高开5%+: 回落2%卖<br>  高开8%+: 回落1%卖<br>Step 3: 设好后不看盘</code><br><br><em>这次你知道为什么了——因为半导体ETF集中度64.6%，日内波动5-6%是常态。</em></div></div></span>
+        </span></div>
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">关注SOX和台积电月营收</span></div>
+        <div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">❌</span><span class="text-gray-300">不追高开8%+，等回落</span></div>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover glow-yellow">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-2xl">🟡</span>
+        <h3 class="font-bold text-amber-400">场景B：高位震荡</h3>
+      </div>
+      <div class="text-xs text-gray-400 mb-4 p-3 rounded-lg bg-gray-800/50">
+        <strong>条件：</strong>AI需求增速放缓 · Book-to-Bill~1.0 · 库存开始堆积
+      </div>
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">⏸️</span><span class="text-gray-300">减仓至1/3，保留底仓</span></div>
+        <div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">⏸️</span><span class="text-gray-300">每次反弹5%+就卖一批</span></div>
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">耐心等回调15-20%再接回</span></div>
+        <div class="flex items-start gap-2"><span class="text-amber-400 mt-0.5">⏰</span><span class="text-gray-300">盯Book-to-Bill是否跌破1.0</span></div>
+      </div>
+    </div>
+    <div class="glass rounded-2xl p-6 card-hover glow-red">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-2xl">🔴</span>
+        <h3 class="font-bold text-red-400">场景C：周期拐头</h3>
+      </div>
+      <div class="text-xs text-gray-400 mb-4 p-3 rounded-lg bg-gray-800/50">
+        <strong>条件：</strong>Book-to-Bill<0.9 · 台积电砍CapEx · SOX跌破200日均线
+      </div>
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">🛑</span><span class="text-gray-300">清仓！不要抄底！
+          <span class="tip tip-right"><span class="tip-icon">i</span><div class="tip-card"><div class="tip-card-title">🛑 为什么周期拐头时不能抄底？</div><div class="tip-card-body">半导体周期下行<strong>通常持续12-18个月</strong>。抄底太早 = "接飞刀"。<br><br>2022年的教训：<br><code>2022年Q1: SOX从高点跌20%<br>→ 有人抄底<br>→ Q2继续跌<br>→ Q3再抄底<br>→ Q4又跌<br>→ 总共跌了35%<br>→ 底在哪？没人知道</code><br><br>正确做法：<br><strong>等Book-to-Bill重新站上1.0 + SOX重新站上200日均线</strong>，再分批进。<br><br>少赚底部10%的利润，但避开50%的下跌风险。</div></div></span>
+        </span></div>
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">现金为王，等周期底部</span></div>
+        <div class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✅</span><span class="text-gray-300">底部信号：Book-to-Bill重新>1.0</span></div>
+        <div class="flex items-start gap-2"><span class="text-red-400 mt-0.5">⏰</span><span class="text-gray-300">整个下行期可能12-18个月</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 监控清单 -->
+  <div class="glass rounded-2xl p-6 mb-8">
+    <h3 class="font-bold mb-4 text-lg">📋 每周必看的5个指标</h3>
+    <div class="grid md:grid-cols-5 gap-4">
+      <div class="p-4 rounded-xl bg-gray-800/50 text-center">
+        <div class="text-2xl mb-2">📊</div>
+        <div class="text-xs font-bold text-emerald-400 mb-1">Book-to-Bill</div>
+        <div class="text-xs text-gray-500">SEMI月报<br>>1.0=好 <1.0=警惕</div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 text-center">
+        <div class="text-2xl mb-2">🏭</div>
+        <div class="text-xs font-bold text-blue-400 mb-1">台积电月营收</div>
+        <div class="text-xs text-gray-500">每月10日公布<br>领先全行业1-2月</div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 text-center">
+        <div class="text-2xl mb-2">📈</div>
+        <div class="text-xs font-bold text-amber-400 mb-1">SOX费城半导体</div>
+        <div class="text-xs text-gray-500">每日看<br>200日均线=生死线</div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 text-center">
+        <div class="text-2xl mb-2">💰</div>
+        <div class="text-xs font-bold text-purple-400 mb-1">CapEx指引</div>
+        <div class="text-xs text-gray-500">季度财报时看<br>砍CapEx=最危险信号</div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 text-center">
+        <div class="text-2xl mb-2">🏪</div>
+        <div class="text-xs font-bold text-cyan-400 mb-1">北方华创订单</div>
+        <div class="text-xs text-gray-500">季度财报时看<br>你的ETF晴雨表</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 交易纪律 -->
+  <div class="glass rounded-2xl p-6">
+    <h3 class="font-bold mb-4 text-lg">📋 升级版交易纪律</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="p-4 rounded-xl bg-gray-800/50 border-l-2 border-emerald-500">
+        <div class="text-sm font-semibold text-emerald-400 mb-2">✅ 做到这些 = 认知变现</div>
+        <div class="text-xs text-gray-400 space-y-1">
+          <div>• 高开3%+ → 卖1/2 + 设回落止盈</div>
+          <div>• 每周看一次Book-to-Bill和SOX</div>
+          <div>• 建仓前先确认周期方向</div>
+          <div>• 单只ETF仓位不超过总资金40%</div>
+          <div>• 每次操作前问自己："我现在知道为什么吗？"</div>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-gray-800/50 border-l-2 border-red-500">
+        <div class="text-sm font-semibold text-red-400 mb-2">❌ 做了这些 = 赌博</div>
+        <div class="text-xs text-gray-400 space-y-1">
+          <div>• "涨了这么多，肯定还能涨" → 追高</div>
+          <div>• "跌了这么多，应该到底了" → 盲目抄底</div>
+          <div>• "别人都在买" → FOMO</div>
+          <div>• 满仓单一ETF → 无对冲</div>
+          <div>• 不设止盈止损 → 裸奔</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 术语表 ==================== -->
+<section class="max-w-7xl mx-auto px-6 py-16 border-t border-white/5">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="text-5xl font-black text-white/5">📚</span>
+    <h2 class="text-2xl font-bold">术语速查表</h2>
+  </div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-emerald-400 text-sm">刻蚀 Etching</div><div class="text-xs text-gray-400 mt-1">用化学气体把硅片上多余的材料"雕刻"掉。制程越先进，步骤越多。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-blue-400 text-sm">薄膜沉积 Deposition</div><div class="text-xs text-gray-400 mt-1">在硅片上"镀"一层极薄材料。CVD/PVD/ALD三种技术。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-purple-400 text-sm">光刻 Lithography</div><div class="text-xs text-gray-400 mt-1">用光把电路图"印"到硅片上。ASML独家垄断EUV。国产化<1%。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-amber-400 text-sm">CMP 化学机械抛光</div><div class="text-xs text-gray-400 mt-1">把每一层芯片表面磨平，才能继续叠加下一层。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-cyan-400 text-sm">Book-to-Bill</div><div class="text-xs text-gray-400 mt-1">订单出货比。>1.0=行业上行，<1.0=下行。最重要的领先指标。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-red-400 text-sm">硅周期 Silicon Cycle</div><div class="text-xs text-gray-400 mt-1">半导体3-4年的景气-衰退循环。永不消失。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-pink-400 text-sm">国产替代</div><div class="text-xs text-gray-400 mt-1">用国产设备替代进口设备。当前25%→目标50%。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-indigo-400 text-sm">SOX 费城半导体指数</div><div class="text-xs text-gray-400 mt-1">30只全球主要半导体公司。领先A股半导体板块1-2季度。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-orange-400 text-sm">CapEx 资本开支</div><div class="text-xs text-gray-400 mt-1">晶圆厂建厂/买设备的钱。CapEx增=设备公司订单增。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-lime-400 text-sm">HBM 高带宽存储</div><div class="text-xs text-gray-400 mt-1">AI芯片必需的存储器。2026年严重短缺，美光全年售罄。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-yellow-400 text-sm">EUV 极紫外光刻</div><div class="text-xs text-gray-400 mt-1">ASML独家。每台$2-3.5亿。7nm以下芯片必需。中国被禁。</div></div>
+    <div class="glass rounded-xl p-4"><div class="font-semibold text-teal-400 text-sm">大基金</div><div class="text-xs text-gray-400 mt-1">国家集成电路产业投资基金。三期¥3,440亿，重点投设备和材料。</div></div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="border-t border-white/5 mt-16">
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-xs text-gray-600">
+        <p>编写时间：2026年6月13日 · 下一步：用认知赚钱，不再靠运气</p>
+        <p class="mt-1">本文档不构成投资建议 · 数据来源：WSTS / SEMI / 东方财富 / 易方达官网 / Reuters</p>
+      </div>
+      <div class="flex gap-2">
+        <span class="px-3 py-1 rounded-full text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">159558</span>
+        <span class="px-3 py-1 rounded-full text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20">半导体设备</span>
+        <span class="px-3 py-1 rounded-full text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">认知升级</span>
+      </div>
+    </div>
+    <div class="mt-6 p-4 rounded-xl bg-gradient-to-r from-emerald-500/5 via-blue-500/5 to-amber-500/5 border border-white/5">
+      <p class="text-center text-sm text-gray-400">
+        🪞 <strong class="text-gray-300">你赚了660元。</strong>
+        读完这篇，你至少值 <strong class="text-emerald-400">6600元</strong> 的认知。
+        因为下次你知道<strong class="text-blue-400">为什么买、什么时候卖、亏了怎么办</strong>。
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
