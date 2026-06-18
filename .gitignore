@@ -2,3 +2,6 @@
 .omc/
 *.zip
 session_*
+.workbuddy/
+# Windows 保留设备名误生成的空文件（无法直接删除，但需忽略）
+nul
