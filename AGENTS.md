@@ -46,7 +46,7 @@
 | 类型 | 模式 | 示例 |
 |------|------|------|
 | 每日复盘 | `YYYY-MM-DD-daily-review.md` | `2026-06-16-daily-review.md` |
-| 盘中复盘 | `YYYY-MM-DD-intraday-HHmm.md` | `2026-06-16-intraday-1130.md` |
+| 盘中复盘 | `YYYY-MM-DD-intraday[-HHmm].md`（HHmm 可选，仅同日多份时加）| `2026-06-16-intraday.md`（单份）或 `2026-06-16-intraday-1130.md`（多份）|
 | 周度复盘 | `YYYY-MM-DD-weekly-review.md` | `2026-06-12-weekly-review.md` |
 | 交易卡片 | `YYYY-MM-DD-trading-card.md` | `2026-06-12-trading-card.md` |
 | 条件单卡 | `YYYY-MM-DD-条件单设置卡[-vN].md` | `2026-06-16-条件单设置卡-v2.md` |
@@ -65,7 +65,7 @@
 | 类型 | 写入路径 |
 |------|---------|
 | 日复盘 | `{{WORKSPACE_JOURNAL}}/reviews/daily/YYYY-MM/YYYY-MM-DD.md` |
-| 盘中复盘 | `{{WORKSPACE_JOURNAL}}/reviews/daily/YYYY-MM/YYYY-MM-DD-intraday-HHmm.md` |
+| 盘中复盘 | `{{WORKSPACE_JOURNAL}}/reviews/daily/YYYY-MM/YYYY-MM-DD-intraday[-HHmm].md`（HHmm 可选） |
 | 周复盘 | `{{WORKSPACE_JOURNAL}}/reviews/weekly/YYYY-WNN.md` |
 
 写入前 `mkdir -p`，写完提醒用户"可推送"，用户说"推送复盘"才 `git commit + push`。

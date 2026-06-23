@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-22 A股市场复盘 — 多Agent分析版</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+:root {
+  --navy: #0f1b2e;
+  --navy-light: #1a2b45;
+  --amber: #d97706;
+  --red: #dc2626;
+  --green: #059669;
+  --blue: #0891b2;
+  --gray: #6b7280;
+  --bg: #f8fafc;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: #1e293b;
+  line-height: 1.6;
+}
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: #fff;
+  padding: 48px 24px;
+  text-align: center;
+}
+.hero h1 { font-size: 28px; margin-bottom: 8px; }
+.hero .subtitle { font-size: 15px; color: #94a3b8; margin-bottom: 16px; }
+.hero .tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero .tag {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tag-red { background: rgba(220,38,38,0.25); color: #fca5a5; border: 1px solid rgba(220,38,38,0.4); }
+.tag-green { background: rgba(5,150,105,0.25); color: #6ee7b7; border: 1px solid rgba(5,150,105,0.4); }
+.tag-amber { background: rgba(217,119,6,0.25); color: #fcd34d; border: 1px solid rgba(217,119,6,0.4); }
+.tag-blue { background: rgba(8,145,178,0.25); color: #67e8f9; border: 1px solid rgba(8,145,178,0.4); }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 24px 16px; }
+
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 12px 16px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.sticky-item { display: flex; align-items: center; gap: 4px; }
+.sticky-item .name { color: var(--gray); }
+.sticky-item .val { font-weight: 700; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.section h2 {
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e2e8f0;
+}
+.chart { width: 100%; height: 380px; margin: 12px 0; }
+
+.summary-box {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left: 4px solid var(--blue);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.summary-box strong { color: var(--navy); }
+
+.warning-box {
+  background: #fef2f2;
+  border-left: 4px solid var(--red);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.highlight-box {
+  background: #fffbeb;
+  border-left: 4px solid var(--amber);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.tip-box {
+  background: #ecfeff;
+  border-left: 4px solid var(--blue);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 12px 0; }
+th { background: var(--navy); color: #fff; padding: 10px 8px; text-align: center; font-weight: 600; }
+td { padding: 8px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+tr:hover { background: #f1f5f9; }
+
+.agent-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 16px 0; }
+@media (max-width: 768px) { .agent-grid { grid-template-columns: 1fr; } }
+.agent-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafbfc;
+}
+.agent-card h3 { font-size: 14px; color: var(--blue); margin-bottom: 8px; }
+.agent-card .verdict { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+
+.footer { text-align: center; padding: 24px; color: var(--gray); font-size: 12px; }
+
+.disclaimer { background: #f1f5f9; padding: 16px; border-radius: 8px; font-size: 12px; color: var(--gray); text-align: center; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>📊 2026-06-22 A股市场深度复盘</h1>
+  <p class="subtitle">节后补涨 + 费半映射 + 主力防御性调仓 · 3.74万亿历史第二量 · 3 Agent交叉验证</p>
+  <div class="tags">
+    <span class="tag tag-red">沪指 +1.78%</span>
+    <span class="tag tag-red">创业板 +2.52%</span>
+    <span class="tag tag-red">科创50 +1.96%</span>
+    <span class="tag tag-amber">成交 3.74万亿</span>
+    <span class="tag tag-blue">期指交割日</span>
+  </div>
+</div>
+
+<!-- Sticky 指标栏 -->
+<div class="sticky-bar">
+  <div class="sticky-item"><span class="name">上证</span><span class="val up">4163 +1.78%</span></div>
+  <div class="sticky-item"><span class="name">深成指</span><span class="val up">16373 +2.13%</span></div>
+  <div class="sticky-item"><span class="name">创业板</span><span class="val up">4359 +2.52%</span></div>
+  <div class="sticky-item"><span class="name">科创50</span><span class="val up">1949 +1.96%</span></div>
+  <div class="sticky-item"><span class="name">159558</span><span class="val up">3.695 +3.44%</span></div>
+  <div class="sticky-item"><span class="name">516150</span><span class="val up">2.235 +4.10%</span></div>
+</div>
+
+<div class="container">
+
+  <!-- 核心结论 -->
+  <div class="summary-box">
+    <p><strong>📍 核心判断：</strong>节后补涨 + 外盘映射 + 主力防御性调仓三力叠加。<strong>表面普涨，内部换防。</strong></p>
+    <p style="margin-top:8px;">技术面Agent判"资金入场期" vs 资金面Agent判"存量轮动"——<strong>这个分歧本身就是今天市场最真实的写照。</strong></p>
+  </div>
+
+  <!-- 1. 指数涨跌幅 -->
+  <div class="section">
+    <h2>📈 今日指数涨跌幅</h2>
+    <div id="chart-index" class="chart"></div>
+  </div>
+
+  <!-- 2. 近6日走势 -->
+  <div class="section">
+    <h2>📉 近6日指数走势（6/12 → 6/22）</h2>
+    <div class="warning-box">
+      <p>⚠️ <strong>创业板5连阳累计+14.9%</strong>，严重超买。科创50从6/12的1663到6/22的1949，两周涨17%。</p>
+    </div>
+    <div id="chart-trend" class="chart"></div>
+  </div>
+
+  <!-- 3. 板块排行 -->
+  <div class="section">
+    <h2>🔥 今日板块涨幅 TOP10（行业）</h2>
+    <div id="chart-sector" class="chart"></div>
+    <div class="highlight-box">
+      <p>💡 <strong>板块从"科技抱团"切换到"大金融+有色+化工"</strong>——全是上周滞涨的低位板块。这是高切低防御性轮动，不是新主线启动。</p>
+    </div>
+  </div>
+
+  <!-- 4. 资金流向 -->
+  <div class="section">
+    <h2>💰 主力资金净流入 TOP10（概念板块）</h2>
+    <div id="chart-flow" class="chart"></div>
+    <div class="warning-box">
+      <p>🔴 <strong>核心信号：题材股 -122.9亿 vs 券商 +121.4亿，数量级完全对称 = 内部腾挪。</strong>资金从高Beta题材撤向低估值大金融=风险偏好下移。</p>
+    </div>
+  </div>
+
+  <!-- 5. ETF 表现 -->
+  <div class="section">
+    <h2>📦 ETF 表现 + 明日MA5推演</h2>
+    <table>
+      <thead>
+        <tr><th>ETF</th><th>今日收盘</th><th>涨幅</th><th>振幅</th><th>乖离MA5</th><th>明日MA5(中性)</th><th>回踩区间</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>159558 设备</td><td>3.695</td><td class="up">+3.44%</td><td>4.62%</td><td class="up">+6.68%</td><td>3.551</td><td>3.50-3.54</td></tr>
+        <tr><td>588200 科创芯片</td><td>4.229</td><td class="up">+2.50%</td><td>4.77%</td><td class="up">+7.04%</td><td>4.055</td><td>4.00-4.04</td></tr>
+        <tr><td>515880 通信</td><td>1.859</td><td class="up">+2.03%</td><td>4.50%</td><td class="up">+6.15%</td><td>1.764</td><td>1.75-1.77</td></tr>
+        <tr><td>516150 稀土</td><td>2.235</td><td class="up">+4.10%</td><td>4.47%</td><td class="up">+5.38%</td><td>2.160</td><td>2.13-2.15</td></tr>
+        <tr><td>513100 纳指</td><td>2.250</td><td class="down">-0.71%</td><td>—</td><td>—</td><td>—</td><td>外资偏谨慎</td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <p>📌 <strong>均线移动靶提醒：</strong>以上"回踩区间"是按明日(6/23)推演后的MA5计算，不是今日MA5。159558要跌4%才到回踩区(3.50-3.54)。</p>
+    </div>
+  </div>
+
+  <!-- 6. 3 Agent 分析对比 -->
+  <div class="section">
+    <h2>🤖 3 Agent 交叉验证</h2>
+    <div class="agent-grid">
+      <div class="agent-card">
+        <h3>消息面 Agent</h3>
+        <div class="verdict">基本面催化为主</div>
+        <p style="font-size:13px;color:var(--gray);">①费半+6.42%创新高 ②陆家嘴政策 ③交割日空头回补。偏积极但防分化。</p>
+      </div>
+      <div class="agent-card">
+        <h3>技术面 Agent</h3>
+        <div class="verdict">资金入场期末段</div>
+        <p style="font-size:13px;color:var(--gray);">放量普涨比6/18健康，但生益长上影+ETF高振幅=顶部喧嚣。6/23消化>续涨。</p>
+      </div>
+      <div class="agent-card">
+        <h3>资金面 Agent</h3>
+        <div class="verdict">存量轮动非增量</div>
+        <p style="font-size:13px;color:var(--gray);">题材-122.9亿vs券商+121.4亿=内部腾挪。杠杆6/18净流出174.9亿。6/23验证日。</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <p>✅ <strong>三方一致：</strong>①今天比6/18虹吸健康 ②费半是核心催化 ③短期已超买需消化</p>
+      <p style="margin-top:6px;">⚠️ <strong>三方分歧：</strong>券商+121.4亿是牛市信号(技术面)还是交割日脉冲(资金面)？6/23验证。</p>
+    </div>
+  </div>
+
+  <!-- 7. 明日策略 -->
+  <div class="section">
+    <h2>🎯 明日(6/23)策略</h2>
+    <table>
+      <thead><tr><th>情景</th><th>概率</th><th>触发</th><th>操作</th></tr></thead>
+      <tbody>
+        <tr><td>分歧/震荡日</td><td><strong>50%</strong></td><td>券商冲高回落，有色半日游</td><td>观望/极小仓位</td></tr>
+        <tr><td>高位回调</td><td>30%</td><td>券商低开+创业板中阴回踩MA5</td><td>回踩不破=低吸</td></tr>
+        <tr><td>继续逼空</td><td>20%</td><td>券商续涨+成交维持3万亿</td><td>❌不追高</td></tr>
+      </tbody>
+    </table>
+    <div class="warning-box">
+      <p>🚫 <strong>不做清单：</strong>①追券商(需验证) ②追有色化工(第1日试探) ③追159558/588200今日收盘价(乖离+6%~7%) ④重仓</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    本报告不构成投资建议 | 数据来源：腾讯qt.gtimg.cn + 东财push2/datacenter + WebSearch | 数据获取：2026-06-22 15:02 北京时间<br>
+    生成工具：a-share-analysis advisor模式 HTML输出
+  </div>
+</div>
+
+<script>
+// 1. 指数涨跌幅柱状图
+var chart1 = echarts.init(document.getElementById('chart-index'));
+chart1.setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'category', data: ['上证指数','深成指','创业板指','科创50','沪深300','中证500','中证1000'],
+    axisLabel: { fontSize: 11 } },
+  yAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  series: [{
+    type: 'bar',
+    data: [
+      {value: 1.78, itemStyle:{color:'#dc2626'}},
+      {value: 2.13, itemStyle:{color:'#dc2626'}},
+      {value: 2.52, itemStyle:{color:'#dc2626'}},
+      {value: 1.96, itemStyle:{color:'#dc2626'}},
+      {value: 2.39, itemStyle:{color:'#dc2626'}},
+      {value: 2.26, itemStyle:{color:'#dc2626'}},
+      {value: 1.08, itemStyle:{color:'#f87171'}}
+    ],
+    label: { show: true, position: 'top', formatter: '{c}%', color: '#dc2626', fontWeight: 'bold' },
+    barWidth: '55%'
+  }],
+  grid: { left: '8%', right: '5%', bottom: '10%', top: '10%' }
+});
+
+// 2. 近6日走势折线
+var chart2 = echarts.init(document.getElementById('chart-trend'));
+chart2.setOption({
+  tooltip: { trigger: 'axis' },
+  legend: { data: ['上证指数','创业板指','科创50','沪深300'], top: 0 },
+  xAxis: { type: 'category', data: ['6/12','6/15','6/16','6/17','6/18','6/22'] },
+  yAxis: [
+    { type: 'value', name: '点位', position: 'left', scale: true },
+    { type: 'value', name: '科创50', position: 'right', scale: true }
+  ],
+  series: [
+    { name:'上证指数', type:'line', data:[4032,4097,4092,4108,4091,4163], smooth:true, lineStyle:{width:2} },
+    { name:'创业板指', type:'line', data:[3830,4034,4103,4167,4252,4359], smooth:true, lineStyle:{width:3}, itemStyle:{color:'#dc2626'} },
+    { name:'科创50', type:'line', yAxisIndex:1, data:[1663,1748,1758,1841,1912,1949], smooth:true, lineStyle:{width:2,type:'dashed'} },
+    { name:'沪深300', type:'line', data:[4777,4892,4884,4931,4942,5060], smooth:true, lineStyle:{width:2} }
+  ],
+  grid: { left: '8%', right: '10%', bottom: '8%', top: '12%' }
+});
+
+// 3. 板块涨幅 TOP10 横向条形图
+var chart3 = echarts.init(document.getElementById('chart-sector'));
+chart3.setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  yAxis: { type: 'category', data: ['氟化工','证券','小金属','保险','钼','铅锌','钛白粉','磷化工','钨'].reverse() },
+  series: [{
+    type: 'bar',
+    data: [6.79,6.43,6.99,7.18,7.89,8.03,8.82,8.97,9.80].map(function(v){
+      return { value: v, itemStyle: { color: v >= 8 ? '#b91c1c' : '#dc2626' } };
+    }),
+    label: { show: true, position: 'right', formatter: '{c}%', fontWeight: 'bold', color: '#dc2626' },
+    barWidth: '60%'
+  }],
+  grid: { left: '15%', right: '10%', bottom: '8%', top: '5%' }
+});
+
+// 4. 资金流向（含负值）
+var chart4 = echarts.init(document.getElementById('chart-flow'));
+chart4.setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'value', name: '净流入(亿)' },
+  yAxis: { type: 'category', data: ['东方财富热股(-79)','虚拟机器人(+43)','科创做市商(+43)','氟化工(+41)','磷化工(+47)','小金属(+130)','券商概念(+121)'] },
+  series: [{
+    type: 'bar',
+    data: [
+      {value:-79.4, itemStyle:{color:'#059669'}},
+      {value:43.1, itemStyle:{color:'#dc2626'}},
+      {value:42.5, itemStyle:{color:'#dc2626'}},
+      {value:41.4, itemStyle:{color:'#dc2626'}},
+      {value:46.7, itemStyle:{color:'#dc2626'}},
+      {value:130.2, itemStyle:{color:'#b91c1c'}},
+      {value:121.4, itemStyle:{color:'#b91c1c'}}
+    ],
+    label: { show: true, position: function(p){ return p.value > 0 ? 'right' : 'left'; },
+      formatter: function(p){ return p.value + '亿'; }, fontWeight: 'bold' },
+    barWidth: '55%'
+  }],
+  grid: { left: '22%', right: '12%', bottom: '8%', top: '5%' }
+});
+
+// 响应式
+window.addEventListener('resize', function() {
+  chart1.resize(); chart2.resize(); chart3.resize(); chart4.resize();
+});
+</script>
+
+</body>
+</html>

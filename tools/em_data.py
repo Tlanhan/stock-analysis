@@ -43,7 +43,7 @@ from datetime import datetime, timedelta
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    "Referer": "http://data.eastmoney.com/",
+    "Referer": "https://data.eastmoney.com/",  # 2026-06-23: http→https，与所有 API URL 协议一致
 }
 
 # ============================================================

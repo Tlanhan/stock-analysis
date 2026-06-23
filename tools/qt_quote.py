@@ -118,7 +118,14 @@ def quote(symbols, batch_size=40):
 
 
 def _parse_line(line):
-    """解析单行 v_sh600183="1~生益科技~600183~179.4~..." """
+    """解析单行 v_sh600183="1~生益科技~600183~179.4~..."
+
+    字段协议(腾讯 qt.gtimg.cn，2026-06-23 验证有效；若腾讯改协议此函数需更新)：
+      p[1]=名称 p[2]=代码 p[3]=现价 p[4]=昨收 p[5]=今开 p[6]=成交量(手)
+      p[33]=最高 p[34]=最低 p[37]=成交额(元) p[38]=换手率% p[39]=市盈率(动)
+      p[43]=振幅 p[44]=流通市值 p[45]=总市值
+    弱交叉校验：p[2] 应为数字代码、p[3]/p[4] 应为合理股价；若字段错位会触发下方 sanity 报警。
+    """
     p = line.split('="', 1)[1].rstrip('";').split('~')
     if len(p) < 40:
         raise ValueError('字段不足: %d' % len(p))
@@ -133,6 +140,11 @@ def _parse_line(line):
     code = p[2]
     price = f(3)
     preclose = f(4)
+    # 弱校验：p[2] 应为纯数字代码（沪深）或字母（港美），若非则字段协议可能已变
+    if not (code.isdigit() or code.isalpha()):
+        # 字段错位嫌疑，但保留解析不崩溃（旧版兼容）
+        import sys as _sys
+        print(f"⚠️ 字段校验告警: p[2]='{code}' 非预期代码格式，腾讯协议可能变更，请核验", file=_sys.stderr)
     open_ = f(5)
     vol_hand = f(6)            # 成交量(手)
     high = f(33)
