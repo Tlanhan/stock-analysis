@@ -29,22 +29,35 @@ qt_quote.py — 腾讯财经 qt.gtimg.cn 一手行情取数工具
   p[6]成交量(手) p[33]最高 p[34]最低 p[37]成交额(元) p[38]换手率
   p[43]市盈率(动) p[44]振幅 p[49]流通市值(元) p[45]总市值(元)  # 字段位置随源可能微调
 """
-import sys, os, json, urllib.request, io
+import sys, os, json, urllib.request, urllib.error, io, time
 
 # Windows cmd 默认 GBK，强制 stdout UTF-8
 if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
+# 加固参数（2026-06-23）
+MAX_RETRIES = 3
+RETRY_BACKOFF = [0.5, 1.0, 2.0]
+
 
 # ----------------------------- 核心取数 -----------------------------
 
-def _fetch(url, timeout=12):
-    """带 Referer/UA 的请求。腾讯返回 GBK。"""
-    req = urllib.request.Request(url, headers={
-        'Referer': 'https://gu.qq.com/',
-        'User-Agent': 'Mozilla/5.0'
-    })
-    return urllib.request.urlopen(req, timeout=timeout).read().decode('gbk', 'ignore')
+def _fetch(url, timeout=8):
+    """带 Referer/UA 的请求，指数退避重试。腾讯返回 GBK。失败抛出明确异常。"""
+    last_err = None
+    for attempt in range(MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={
+                'Referer': 'https://gu.qq.com/',
+                'User-Agent': 'Mozilla/5.0'
+            })
+            return urllib.request.urlopen(req, timeout=timeout).read().decode('gbk', 'ignore')
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ConnectionError) as e:
+            last_err = e
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(RETRY_BACKOFF[attempt])
+                continue
+    raise ConnectionError(f"取数失败（重试{MAX_RETRIES}次后仍错误）: {url} → {last_err}")
 
 
 def _normalize_code(code):
@@ -71,13 +84,21 @@ def quote(symbols, batch_size=40):
     # 分批请求合并
     for i in range(0, len(codes), batch_size):
         batch = codes[i:i + batch_size]
-        url = 'http://qt.gtimg.cn/q=' + ','.join(batch)
-        try:
-            raw = _fetch(url)
-        except Exception as e:
-            # 整批失败：逐只标记错误
+        # 优先 https，失败降级 http（2026-06-23：原硬编码 http 升级，保留降级兜底）
+        fetched = False
+        for scheme in ('https', 'http'):
+            url = f'{scheme}://qt.gtimg.cn/q=' + ','.join(batch)
+            try:
+                raw = _fetch(url)
+                fetched = True
+                break
+            except Exception as e:
+                last_err = e
+                continue
+        if not fetched:
+            # 两种协议都失败：逐只标记错误
             for c in batch:
-                results.append({'code': c, 'err': 'fetch: ' + str(e)})
+                results.append({'code': c, 'err': 'fetch: ' + str(last_err)})
             continue
         for line in raw.split(';'):
             line = line.strip()
