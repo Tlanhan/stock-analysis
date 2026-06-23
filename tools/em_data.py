@@ -75,7 +75,7 @@ def _month_start_str(fmt="%Y%m%d"):
     return now.replace(day=1).strftime(fmt)
 
 
-def fetch(url, timeout=REQUEST_TIMEOUT):
+def fetch(url: str, timeout: int = REQUEST_TIMEOUT) -> dict:
     """通用JSON请求，带指数退避重试。失败抛出最后一个异常并明确标注。"""
     last_err = None
     for attempt in range(MAX_RETRIES):
@@ -95,7 +95,7 @@ def fetch(url, timeout=REQUEST_TIMEOUT):
 # ============================================================
 # 1. 板块涨跌幅排行（概念 + 行业）
 # ============================================================
-def get_sector_rank(market="90", sec_type="3", top=15):
+def get_sector_rank(market: str = "90", sec_type: str = "3", top: int = 15) -> list:
     """
     market: 90=板块
     sec_type: 3=概念板块, 2=行业板块
@@ -165,7 +165,7 @@ def _load_sector_codes():
 SECTOR_CODES = _load_sector_codes()
 
 
-def get_sector_kline(secid, beg=None, end=None):
+def get_sector_kline(secid: str, beg: str = None, end: str = None) -> tuple:
     """拉板块日K线。beg/end 默认：本月1号 ~ 今天（动态，原硬编码 20260610/20260630 已废弃）。"""
     beg = beg or _month_start_str()
     end = end or _today_str()

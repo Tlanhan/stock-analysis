@@ -42,7 +42,7 @@ RETRY_BACKOFF = [0.5, 1.0, 2.0]
 
 # ----------------------------- 核心取数 -----------------------------
 
-def _fetch(url, timeout=8):
+def _fetch(url: str, timeout: int = 8) -> str:
     """带 Referer/UA 的请求，指数退避重试。腾讯返回 GBK。失败抛出明确异常。"""
     last_err = None
     for attempt in range(MAX_RETRIES):
@@ -60,7 +60,7 @@ def _fetch(url, timeout=8):
     raise ConnectionError(f"取数失败（重试{MAX_RETRIES}次后仍错误）: {url} → {last_err}")
 
 
-def _normalize_code(code):
+def _normalize_code(code: str) -> str:
     """600183 -> sh600183, 002916 -> sz002916, 000001 -> sz000001(指数sh000001)。
     已带 sh/sz/hs 前缀的保留。指数需调用方显式带 sh/sz。"""
     code = code.strip().lower()
@@ -73,7 +73,7 @@ def _normalize_code(code):
     return 'sz' + code
 
 
-def quote(symbols, batch_size=40):
+def quote(symbols, batch_size: int = 40) -> list:
     """取一只或多只股票行情。symbols 为字符串或列表。
     自动分批请求（每批 batch_size 只），避免 URL 过长被拒。
     返回 list[dict]。失败的单只置 {'code':x, 'err':...}。"""
@@ -117,7 +117,7 @@ def quote(symbols, batch_size=40):
     return results
 
 
-def _parse_line(line):
+def _parse_line(line: str) -> dict:
     """解析单行 v_sh600183="1~生益科技~600183~179.4~..."
 
     字段协议(腾讯 qt.gtimg.cn，2026-06-23 验证有效；若腾讯改协议此函数需更新)：
