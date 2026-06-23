@@ -17,9 +17,9 @@
 
 | 占位符 | 解析为（本机默认） | 说明 |
 |--------|------------------|------|
-| `{{WORKSPACE_ANALYSIS}}` | `G:/github/stock分析` | 本仓库（试炼场/工作区）根目录 |
-| `{{WORKSPACE_SKILL}}` | `G:/github/stock-skill` | AI Skill 长期归档仓库 |
-| `{{WORKSPACE_JOURNAL}}` | `G:/github/stock-journal` | 复盘文件终态归档仓库 |
+| `{{WORKSPACE_ANALYSIS}}` | `G:/github/stock-trading-system/stock-analysis` | 本仓库（试炼场/工作区）根目录 |
+| `{{WORKSPACE_SKILL}}` | `G:/github/stock-trading-system/stock-skill` | AI Skill 长期归档仓库 |
+| `{{WORKSPACE_JOURNAL}}` | `G:/github/stock-trading-system/stock-journal` | 复盘文件终态归档仓库 |
 | `{{SKILLS_ACTIVE}}` | `~/.claude/skills` | AI 生效环境（skill 软链接目录） |
 
 > 换机器/换目录时，只需修改本表四处，全工作区文档自动适配。

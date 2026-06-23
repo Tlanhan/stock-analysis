@@ -13,8 +13,8 @@
 >
 > **路径占位符**（2026-06-23 新增，与 AGENTS.md 一致）：本文件使用以下占位符替代绝对路径，
 > 解析表见 `AGENTS.md`「路径占位符」章节：
-> `{{WORKSPACE_ANALYSIS}}`=`G:/github/stock分析` / `{{WORKSPACE_SKILL}}`=`G:/github/stock-skill` /
-> `{{WORKSPACE_JOURNAL}}`=`G:/github/stock-journal` / `{{SKILLS_ACTIVE}}`=`~/.claude/skills`
+> `{{WORKSPACE_ANALYSIS}}`=`G:/github/stock-trading-system/stock-analysis` / `{{WORKSPACE_SKILL}}`=`G:/github/stock-trading-system/stock-skill` /
+> `{{WORKSPACE_JOURNAL}}`=`G:/github/stock-trading-system/stock-journal` / `{{SKILLS_ACTIVE}}`=`~/.claude/skills`
 
 ---
 
