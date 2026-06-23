@@ -12,7 +12,7 @@
 #   4. 成功后把 issue URL 写回本地 md 顶部 frontmatter
 #   5. 在 INDEX.md 对应行追加 issue 号
 #
-# 依赖: gh CLI(已登录 Tlanhan/stock-skill)
+# 依赖: gh CLI(已登录 Tlanhan/stock-journal)
 # 仓库: PRIVATE — 不脱敏,直接推
 #
 # 退出码: 0=成功, 1=参数错, 2=文件不存在, 3=解析失败, 4=gh 创建失败
@@ -20,7 +20,7 @@
 set -euo pipefail
 
 REPO="Tlanhan/stock-journal"
-MISTAKES_DIR="G:/github/stock分析/trade-mistakes"
+MISTAKES_DIR="${MISTAKES_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 DRY_RUN=0
 
 # ===== 参数解析 =====
@@ -122,7 +122,7 @@ trap "rm -f $BODY_FILE" EXIT
   echo "---"
   echo ""
   echo "> 🤖 本 issue 由 \`trade-mistakes/sync-to-issue.sh\` 自动同步"
-  echo "> 来源文件: \`G:/github/stock分析/trade-mistakes/$MD_BASENAME\`"
+  echo "> 来源文件: \`trade-mistakes/$MD_BASENAME\`"
   echo "> 同步时间: $(date '+%Y-%m-%d %H:%M:%S')"
 } > "$BODY_FILE"
 
