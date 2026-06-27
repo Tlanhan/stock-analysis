@@ -2,7 +2,7 @@
 
 > **用途**：任何交易执行前，必须逐项过一遍。嵌入 `a-share-trigger-check` 模式B。
 > **耗时**：30秒。过不了的项 → 禁止下单。
-> **关联**：`portfolio-state.md`（持仓）、`market-regime.md`（环境参数）、`trade-log-*.md`（记录）。
+> **关联**：`portfolio-state.md`（持仓）、`market-regime.md`（环境参数）。
 
 ---
 

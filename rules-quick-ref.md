@@ -98,8 +98,7 @@
 
 | 文件 | 用途 | 何时读取 |
 |------|------|---------|
-| `portfolio-state.md` | 当前持仓/资金 | 每次决策前 |
-| `trade-log-YYYY-MM.md` | 交易执行记录 | 盘后更新 |
+| `portfolio-state.md` | 当前持仓/资金（用于分析和写条件单） | 每次决策前 |
 | `market-regime.md` | 环境分类+策略参数 | 写卡前 |
 | `pre-trade-checklist.md` | 下单前30秒检查 | 每次下单前 |
 | `sentiment-calendar-YYYY-MM.md` | 情绪扰动日历 | 写卡/复盘时 |
